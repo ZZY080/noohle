@@ -4,7 +4,7 @@ import { AgGridReact } from 'ag-grid-react'; // React Data Grid Component
 import 'ag-grid-community/styles/ag-grid.css'; // Mandatory CSS required by the Data Grid
 import 'ag-grid-community/styles/ag-theme-quartz.css'; // O
 // import 'ag-grid-community/styles/ag-theme-alpine.css'; // 1
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useEffect } from 'react';
 interface IRow {
   make: string;
   model: string;
@@ -14,7 +14,7 @@ interface IRow {
 const GridExample = () => {
   // Row Data: The data to be displayed.
   const defaultColDef = useMemo(() => {
-    console.log("useMemo")
+    console.log('useMemo');
     return {
       filter: true, // Enable filtering on all columns
     };
@@ -25,6 +25,7 @@ const GridExample = () => {
     { make: 'Toyota', model: 'Corolla', price: 29600, electric: false },
   ]);
   const CustomButtonComponent = (props: any) => {
+    console.log('props:', props);
     return <button onClick={() => window.alert('clicked')}>Push Me!</button>;
   };
   // Column Definitions: Defines the columns to be displayed.
@@ -72,8 +73,10 @@ const GridExample = () => {
   const pagination = true;
   const paginationPageSize = 2;
   const paginationPageSizeSelector = [1, 2, 3];
+
   const paginationNumberFormatter = useMemo(() => {
-    return (params:any) => {
+    return (params: any) => {
+      console.log('params:', params);
       const currentPage = params.api.paginationGetCurrentPage() + 1;
       const totalPages = params.api.paginationGetTotalPages();
       const pageSize = params.api.paginationGetPageSize();
@@ -106,7 +109,8 @@ const GridExample = () => {
         pagination={pagination}
         paginationPageSize={paginationPageSize}
         paginationPageSizeSelector={paginationPageSizeSelector}
-        paginationNumberFormatter={paginationNumberFormatter}
+        // onPaginationChanged={onPaginationChanged}
+        // paginationNumberFormatter={paginationNumberFormatter}
       />
     </div>
   );
