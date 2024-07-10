@@ -1,0 +1,22 @@
+image: node:20
+variables:
+  CI: 'true'
+
+# Main job
+CI:
+  interruptible: true
+  only:
+    - main
+    - merge_requests
+  script:
+    # Connect your workspace on nx.app and uncomment this to enable task distribution.
+    # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
+    # - npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
+
+    - npm ci
+    - NX_HEAD=$CI_COMMIT_SHA
+    - NX_BASE=${CI_MERGE_REQUEST_DIFF_BASE_SHA:-$CI_COMMIT_BEFORE_SHA}
+
+    # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
+    # - npx nx-cloud record -- echo Hello World
+    - npx nx affected --base=$NX_BASE --head=$NX_HEAD -t lint test build

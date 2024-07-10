@@ -1,0 +1,28 @@
+
+
+/* 自定义ag grid */
+.ag-theme-quartz {
+  
+    --ag-foreground-color: rgb(14, 68, 145);
+ 
+    --ag-background-color: rgb(241, 247, 255);
+   
+    --ag-row-hover-color: rgb(216, 226, 255);
+    --ag-row-select-border-radius:5px;
+}
+
+/* 自定义表格选中圆角 */
+.ag-cell-focus {
+  border-radius: var(--ag-row-select-border-radius);
+}
+
+/* 单元格类 */
+.rag-green {
+  background-color: #33cc3344;
+  color:red;
+}
+/* 行规则 */
+.rag-red {
+  background-color: red;
+  color: red;
+} 
