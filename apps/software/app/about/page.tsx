@@ -109,6 +109,7 @@ const GridExample = () => {
         pagination={pagination}
         paginationPageSize={paginationPageSize}
         paginationPageSizeSelector={paginationPageSizeSelector}
+        rowModelType="clientSide"
         // onPaginationChanged={onPaginationChanged}
         // paginationNumberFormatter={paginationNumberFormatter}
       />
